@@ -1,17 +1,18 @@
 
 import TailwindProvider from '@/components/tailwind-provider';
+import { env } from '@/env.mjs';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(env.RESEND_API_KEY);
 
 export async function GET() {
   try {
     const data = await resend.emails.send({
-      from: 'Signin Mail <onboarding@resend.dev>',
-      to: ['sbhandari1907@protonmail.com'],
-      subject: 'Hello world',
-      react:TailwindProvider(1)
+      from: 'noreply@example@mail.com',
+      to: ['example@mail.com'],
+      subject: 'Signin Link',
+      text: 'Signin Link 😘😘😘'
     });
 
     return NextResponse.json(data);
