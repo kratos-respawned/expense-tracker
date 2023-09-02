@@ -1,27 +1,28 @@
 import {
-  PlusCircle,
   Laptop,
   Moon,
   SunMedium,
-  Home,
-  LayoutGrid,
-  Bookmark,
   MenuSquare,
   Loader2,
   Github,
-  Heart,
+  ChevronDown,
+  PencilLine,
+  XCircle,
+  ChevronUp,
+
 } from "lucide-react";
 
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
-  home: Home,
-  apps: LayoutGrid,
-  save: Bookmark,
   menu: MenuSquare,
-  like: Heart,
-  whishlist: PlusCircle,
   loader: Loader2,
   github: Github,
+  dropdown: ChevronDown,
+  edit: PencilLine,
+  delete: XCircle,
+  upArrow: ChevronUp,
+
+
 };
