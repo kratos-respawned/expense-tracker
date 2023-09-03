@@ -6,6 +6,7 @@ import { ThemeProvider } from "../components/theme-provider";
 import { ChangeTheme } from "@/components/change-theme";
 import { cn } from "@/lib/utils";
 import AddItem from "@/components/add-item";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
           <AddItem/>
           {children}
           <TailwindProvider />
-
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>

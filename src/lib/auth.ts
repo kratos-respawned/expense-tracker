@@ -20,8 +20,7 @@ const authOptions: NextAuthOptions = {
         }),
         Email({
             sendVerificationRequest:async ({identifier,url})=>{
-              console.log(url);
-                // const resp=await sendWelcomeEmail(url,identifier,env.SMTP_FROM);
+                await sendWelcomeEmail(url,identifier,env.SMTP_FROM);
             }            
         }),
     ],
@@ -29,11 +28,10 @@ callbacks: {
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id
-        session.user.name = token.name
+        session.user.name = token.name 
         session.user.email = token.email
         session.user.image = token.picture
       }
-
       return session
     },
     async jwt({ token, user }) {
@@ -52,11 +50,17 @@ callbacks: {
 
       return {
         id: dbUser.id,
-        name: dbUser.name,
+        name: dbUser.name || dbUser.email?.split("@")[0],
         email: dbUser.email,
         picture: dbUser.image,
       }
     },
+    async signIn({ user}) {
+      if(user.name){
+        return true;
+      }
+      return "/login";
+    }
   },
 }
 
