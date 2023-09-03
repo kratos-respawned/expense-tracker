@@ -25,6 +25,7 @@ export const Icons = {
   edit: PencilLine,
   delete: XCircle,
   upArrow: ChevronUp,
+  dowArrow: ChevronDown,
   rupee: IndianRupee,
   user:User,
   google: (props:IconProps) => (

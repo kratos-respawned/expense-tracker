@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 /* @layer base {
   :root {
     --background: 0 0% 100%;
@@ -68,8 +68,6 @@
  
  */
 
-
-
 @layer base {
   :root {
     /* hsl(225, 80%, 98%) */
@@ -94,7 +92,7 @@
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
@@ -124,4 +122,11 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.dottedGradient {
+  background: radial-gradient(rgba(255, 255, 255, 0.4) 8%, transparent 8%);
+  background-position: 0% 0%;
+  background-size: 5vmin 5vmin;
+  height: 100%;
+  width: 100%;
 }
