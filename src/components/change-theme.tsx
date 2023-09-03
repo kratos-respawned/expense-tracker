@@ -20,9 +20,9 @@ export function ChangeTheme() {
   return (
     <DropdownMenu  >
       <DropdownMenuTrigger asChild className="relative">
-        <Button variant="ghost" className="w-9 px-0">
-          <Icons.sun className="h-[1.5rem] w-[1.5rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Icons.moon className="absolute h-[1.5rem] w-[1.5rem] rotate-180 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+        <Button variant="outline" size={"icon"} className=" ">
+          <Icons.sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <Icons.moon className="absolute w-5 h-5 rotate-180 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>

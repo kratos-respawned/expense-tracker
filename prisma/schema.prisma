@@ -52,6 +52,12 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+enum Category {
+  FOOD
+  TRAVEL
+  ENTERTAINMENT
+  SHOPPING
+}
 model Expense{
   id String @id @default(cuid())
   name String
@@ -59,4 +65,5 @@ model Expense{
   date DateTime
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
+  category Category @default(SHOPPING)
 }

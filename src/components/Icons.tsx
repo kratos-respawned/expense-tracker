@@ -8,9 +8,15 @@ import {
   ChevronDown,
   PencilLine,
   XCircle,
-  ChevronUp,
   IndianRupee,
   User,
+  ArrowDown,
+  ArrowUp,
+  Cog,
+  Utensils,
+  ShoppingBasket,
+  Film,
+  CarFront,
 
 } from "lucide-react";
 type IconProps = React.HTMLAttributes<SVGElement>
@@ -24,10 +30,15 @@ export const Icons = {
   dropdown: ChevronDown,
   edit: PencilLine,
   delete: XCircle,
-  upArrow: ChevronUp,
-  dowArrow: ChevronDown,
+  settings:Cog,
+  upArrow: ArrowUp,
+  downArrow: ArrowDown,
   rupee: IndianRupee,
   user:User,
+  food:Utensils,
+  shopping:ShoppingBasket,
+  entertainment: Film,
+  travel:CarFront,
   google: (props:IconProps) => (
     <svg role="img" viewBox="0 0 24 24" {...props}>
       <path
