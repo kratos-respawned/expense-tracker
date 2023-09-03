@@ -5,6 +5,7 @@ import TailwindProvider from "../components/tailwind-provider";
 import { ThemeProvider } from "../components/theme-provider";
 import { ChangeTheme } from "@/components/change-theme";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           {/* <ChangeTheme/> */}
           {children}
           <TailwindProvider />
+          <Toaster/>
         </ThemeProvider>
       </body>
     </html>
