@@ -5,6 +5,7 @@ import TailwindProvider from "../components/tailwind-provider";
 import { ThemeProvider } from "../components/theme-provider";
 import { ChangeTheme } from "@/components/change-theme";
 import { cn } from "@/lib/utils";
+import AddItem from "@/components/add-item";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +24,10 @@ export default function RootLayout({
       <body className={ cn("",inter.className)}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem >
           {/* <ChangeTheme/> */}
+          <AddItem/>
           {children}
           <TailwindProvider />
+
         </ThemeProvider>
       </body>
     </html>

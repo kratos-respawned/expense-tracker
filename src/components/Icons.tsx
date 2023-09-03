@@ -9,6 +9,7 @@ import {
   PencilLine,
   XCircle,
   ChevronUp,
+  IndianRupee,
 
 } from "lucide-react";
 
@@ -23,6 +24,7 @@ export const Icons = {
   edit: PencilLine,
   delete: XCircle,
   upArrow: ChevronUp,
+  rupee: IndianRupee,
 
 
 };
