@@ -4,14 +4,19 @@ import { Button } from "./ui/button";
 import { Icons } from "./Icons";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import { addExpense } from "../../actions/addExpense";
+import { useState } from "react";
+// import { addExpense } from "../../actions/addExpense";
 
 export function AddItem() {
+  const addExpense = async (formdata:FormData) => {
+    console.log(formdata);
+  }
+  const [category, setCategory] = useState<string>("SHOPPING");
   return (
     <Drawer.Root shouldScaleBackground>
       <Drawer.Trigger asChild>
-        <Button size={"icon"} variant={"outline"}>
-          <Icons.settings className="w-5 h-5" />{" "}
+        <Button size={"icon"} className="fixed  gradient bottom-4 right-4" variant={"outline"}>
+          <Icons.newItem className="w-5 h-5 text-white" />{" "}
         </Button>
       </Drawer.Trigger>
       <Drawer.Portal>
@@ -30,6 +35,7 @@ export function AddItem() {
                 id="name"
                 type="text"
                 name="name"
+                required
                 className="col-span-3"
                 placeholder="Enter a description"
               />
@@ -42,7 +48,7 @@ export function AddItem() {
                 id="price"
                 type="number"
                 name="amount"
-                className=""
+                required
                 placeholder="0.00"
               />
             </div>
@@ -54,6 +60,7 @@ export function AddItem() {
                 id="expenseDate"
                 type="date"
                 name="date"
+                required
                 className="col-span-3"
                 placeholder="Date"
               />
@@ -62,6 +69,7 @@ export function AddItem() {
               <Label htmlFor="expenseDate" className="text-right">
                 Category
               </Label>
+              
               <select name="category" id="category" className="col-span-3">
                 <option value="FOOD">Food</option>
                 <option value="TRAVEL">Travel</option>

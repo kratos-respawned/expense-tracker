@@ -17,6 +17,8 @@ import {
   ShoppingBasket,
   Film,
   CarFront,
+  Dessert,
+  DollarSign,
 
 } from "lucide-react";
 type IconProps = React.HTMLAttributes<SVGElement>
@@ -35,10 +37,11 @@ export const Icons = {
   downArrow: ArrowDown,
   rupee: IndianRupee,
   user:User,
-  food:Utensils,
+  food:Dessert,
   shopping:ShoppingBasket,
   entertainment: Film,
   travel:CarFront,
+  newItem:DollarSign,
   google: (props:IconProps) => (
     <svg role="img" viewBox="0 0 24 24" {...props}>
       <path

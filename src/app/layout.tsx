@@ -5,7 +5,7 @@ import TailwindProvider from "../components/tailwind-provider";
 import { ThemeProvider } from "../components/theme-provider";
 import { ChangeTheme } from "@/components/change-theme";
 import { cn } from "@/lib/utils";
-import {AddItem} from "@/components/SettingsPopup";
+import {AddItem} from "@/components/AddItem";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });

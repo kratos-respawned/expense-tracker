@@ -2,6 +2,7 @@
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth"
+import { revalidatePath } from "next/cache";
 import { date, z } from 'zod';
 enum Category {
     Travel = "TRAVEL",
@@ -21,30 +22,30 @@ export const addExpense = async (data: FormData) => {
     const form = Object.fromEntries(data.entries());
     try {
         const parsedData = ExpenseSchema.parse(form);
-        // const session = await getServerSession(authOptions);
-        // // const session=undefined;
-        // if (!session) {
-        //     throw new Error("Not authenticated");
-        // }
-        console.log(parsedData);
-        // const { user } = session;
-        // const expense = await db.expense.create({
-        //     data: {
-        //         amount: parseInt(parsedData.amount),
-        //         name: parsedData.name,
-        //         date: new Date(parsedData.date),
-        //         user: {
-        //             connect: {
-        //                 id: user.id
-        //             }
-        //         },
-        //         category: parsedData.category
-        //     }
-        // }).catch((e) => {
-        //     console.log(e);
-        //     return null;
-        // });
-        // console.log(expense);
+        const session = await getServerSession(authOptions);
+        
+        if (!session) {
+            throw new Error("Not authenticated");
+        }
+        
+        const { user } = session;
+        const expense = await db.expense.create({
+            data: {
+                amount: parseInt(parsedData.amount),
+                name: parsedData.name,
+                date: new Date(parsedData.date),
+                user: {
+                    connect: {
+                        id: user.id
+                    }
+                },
+                category: parsedData.category
+            }
+        }).catch((e) => {
+            console.log(e);
+            return null;
+        });
+        revalidatePath("/");
 
 
     } catch (e) {
