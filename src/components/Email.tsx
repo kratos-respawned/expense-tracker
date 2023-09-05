@@ -28,11 +28,11 @@ export const WelcomeEmail = ({ url }: WelcomeEmailProps) => {
         <Body className="bg-white my-auto mx-auto font-sans">
           <Container className="my-10 mx-auto p-5 w-[465px]">
             <Heading className="text-2xl font-normal text-center p-0 my-8 mx-0">
-              Welcome to Khata!
+              Welcome to Khaata!
             </Heading>
             <Text className="text-sm">Hello,</Text>
             <Text className="text-sm">
-              Thank you for signing up. Here is your link to get started:
+              Thank you for signing in. Here is your link to get started:
             </Text>
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button
