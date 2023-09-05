@@ -25,14 +25,16 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
           <p>{transaction.name}</p>
         </div>
         <div className="text-right">
-          <p className="text-sm">{
-            new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "INR",
-                }).format(transaction.amount)
-          }</p>
+          <p className="text-sm">
+            {new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "INR",
+            }).format(transaction.amount)}
+          </p>
           <p className="text-xs opacity-50">
-            {format(new Date(transaction.date), "dd MMM yyyy")}
+            {transaction.date
+              ? format(new Date(transaction.date), "dd MMM yyyy")
+              : format(new Date(), "dd MMM yyyy")}
           </p>
         </div>
       </CardHeader>
