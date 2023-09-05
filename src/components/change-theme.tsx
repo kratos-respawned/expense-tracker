@@ -2,18 +2,8 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
-
-// import { Icons } from "@/components/icons"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
 import { Button } from "./ui/button"
 import { Icons } from "./Icons"
-
 export function ChangeTheme() {
   const theme = useTheme()
 const toggleTheme = () => {

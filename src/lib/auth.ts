@@ -1,34 +1,43 @@
 import { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import {env} from "@/env.mjs";
-import {PrismaAdapter} from "@auth/prisma-adapter";
-import Email from "next-auth/providers/email";
+import GoogleProvider from "next-auth/providers/google";
+import { env } from "@/env.mjs";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import EmailProvider from "next-auth/providers/email";
 import { db } from "@/lib/db";
 import { sendWelcomeEmail } from "./link-generator";
+
 const authOptions: NextAuthOptions = {
-    adapter:PrismaAdapter(db),
-    session:{
-        strategy:"jwt"
-    },
-    pages:{
-        signIn:"/login"
-    },
-    providers:[
-        GithubProvider({
-            clientId: env.GITHUB_ID,
-            clientSecret: env.GITHUB_SECRET
-        }),
-        Email({
-            sendVerificationRequest:async ({identifier,url})=>{
-                await sendWelcomeEmail(url,identifier,env.SMTP_FROM);
-            }            
-        }),
-    ],
-callbacks: {
+  adapter: PrismaAdapter(db),
+  session: {
+    strategy: "jwt"
+  },
+  pages: {
+    signIn: "/login"
+  },
+  providers: [
+    GithubProvider({
+      clientId: env.GITHUB_ID,
+      clientSecret: env.GITHUB_SECRET
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_ID,
+      clientSecret: env.GOOGLE_SECRET
+    })
+    ,
+    EmailProvider({
+      from: env.SMTP_FROM,
+      sendVerificationRequest: async ({ identifier, url, provider }) => {
+        // console.log("sendVerificationRequest", identifier, url, provider);
+        await sendWelcomeEmail(url, identifier, provider.from);
+      }
+    }),
+  ],
+  callbacks: {
     async session({ token, session }) {
       if (token) {
         session.user.id = token.id
-        session.user.name = token.name 
+        session.user.name = token.name
         session.user.email = token.email
         session.user.image = token.picture
       }
@@ -55,13 +64,7 @@ callbacks: {
         picture: dbUser.image,
       }
     },
-    async signIn({ user}) {
-      if(user.name){
-        return true;
-      }
-      return "/login";
-    }
   },
 }
 
-export {authOptions}
+export { authOptions }

@@ -1,31 +1,22 @@
 "use server"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db";
+import { ExpenseSchema } from "@/zod/ExpenseSchema";
 import { getServerSession } from "next-auth"
 import { revalidatePath } from "next/cache";
-import { date, z } from 'zod';
-enum Category {
-    Travel = "TRAVEL",
-    Food = "FOOD",
-    Entertainment = "ENTERTAINMENT",
-    Shopping= "SHOPPING"
-}
-const ExpenseSchema = z.object({
-    name: z.string().min(1).max(255),
-    amount: z.string().min(1).max(255),
-    date: z.string(),
-    category: z.nativeEnum(Category)
-});
+import {  z } from 'zod';
 
-export type Expense = z.infer<typeof ExpenseSchema>;
 export const addExpense = async (data: FormData) => {
     const form = Object.fromEntries(data.entries());
     try {
+        
         const parsedData = ExpenseSchema.parse(form);
         const session = await getServerSession(authOptions);
         
         if (!session) {
-            throw new Error("Not authenticated");
+            return {
+                error: "You are not logged in"
+            }
         }
         
         const { user } = session;
@@ -42,16 +33,19 @@ export const addExpense = async (data: FormData) => {
                 category: parsedData.category
             }
         }).catch((e) => {
-            console.log(e);
-            return null;
+            return {
+                error: "Something went wrong"
+            }
         });
+
         revalidatePath("/");
 
 
     } catch (e) {
         if (e instanceof z.ZodError) {
-            console.log(e.issues);
-            return "Validation error"
+            return {
+                error: "Validation error"
+            }
         } else {
             console.log(e);
         }

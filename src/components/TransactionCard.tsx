@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Card, CardHeader } from "./ui/card";
 import { Icons } from "./Icons";
 import { Prisma } from "@prisma/client";
+import { format } from "date-fns";
 
 interface TransactionCardProps {
   transaction: Prisma.ExpenseUncheckedCreateInput;
@@ -11,7 +12,7 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
   return (
     <Card className="flex flex-row rounded-md">
       <CardHeader className="p-3 py-2 flex-row flex-1 items-center space-y-0 justify-between">
-        <div className="flex gap-x-2 items-center text-sm">
+        <div className="flex gap-x-2 items-center text-sm capitalize">
           {transaction.category === "FOOD" ? (
             <FoodCard />
           ) : transaction.category === "TRAVEL" ? (
@@ -30,7 +31,9 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
                 currency: "INR",
                 }).format(transaction.amount)
           }</p>
-          <p className="text-xs opacity-50">Today</p>
+          <p className="text-xs opacity-50">
+            {format(new Date(transaction.date), "dd MMM yyyy")}
+          </p>
         </div>
       </CardHeader>
     </Card>

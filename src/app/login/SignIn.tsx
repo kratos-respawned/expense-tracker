@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+
 import { useRef, useState } from "react";
 type OAuthProviders = "github" | "google";
 export function LoginContainer() {
@@ -43,11 +44,12 @@ export function LoginContainer() {
         });
         return;
       }
-      await signIn("email", {
-        email: mailRef.current?.value.toLowerCase(),
+      console.log(mailRef.current?.value);
+      const signInResult = await signIn("email", {
+        email: mailRef.current.value.toLowerCase(),
         redirect: false,
         callbackUrl: searchParams?.get("from") || "/",
-      });
+      })
       toast({
         title: "Email sent",
         description: "Check your inbox for the login link",
