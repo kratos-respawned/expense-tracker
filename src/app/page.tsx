@@ -83,7 +83,7 @@ export default async function Home() {
       </section>
 
       <div className=" space-y-2 px-4 pt-[330px] h-full   pb-16">
-        {transactions.length === 0 ? (
+        { !transactions || transactions.length === 0 ? (
           <p className="text-center text-sm text-gray-400">
             No transactions yet
           </p>
